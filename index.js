@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();
 
 // express setup
 const app = require("express")();
+const port = process.env.PORT || 3001;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -36,8 +37,8 @@ mongoose.connect(dbURI)
     console.log("Connected ot database.");
     
     // start express listen
-    app.listen(3001, () => {
-      console.log("Backend listening on port 3001");
+    app.listen(port, () => {
+      console.log(`Backend listening on port ${port}`);
     });
   })
   .catch((err) => {
