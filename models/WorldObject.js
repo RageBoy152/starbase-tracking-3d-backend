@@ -16,7 +16,7 @@ const MegaBayDef = {
 
 const objectUniqueDefinitions = {
   RingStand2: {
-    wheelCovers: { type: String, required: true }
+    wheelCovers: { type: Boolean, required: true }
   },
   HighBay: {
     lights: { type: Number, required: true }
@@ -24,6 +24,9 @@ const objectUniqueDefinitions = {
   MegaBay1: MegaBayDef,
   MegaBay2: MegaBayDef,
   SanchezWall_Main: {
+    lights: { type: Number, required: true }
+  },
+  Starfactory: {
     lights: { type: Number, required: true }
   }
 }
@@ -54,6 +57,15 @@ function validateObjectUniqueSettings(value) {
   if (!schema) return false;
 
 
+  Object.keys(settingsData).forEach(key => {
+    if (settingsData[key] === "true") {
+      settingsData[key] = true;
+    } else if (settingsData[key] === "false") {
+      settingsData[key] = false;
+    }
+  });
+
+
   // create temp model and validate
   let Model;
   if (mongoose.models.TempValidationModel) {
@@ -76,6 +88,7 @@ const HighBaySchema = new Schema(objectUniqueDefinitions.HighBay, { _id: false }
 const MegaBay1Schema = new Schema(objectUniqueDefinitions.MegaBay1, { _id: false });
 const MegaBay2Schema = new Schema(objectUniqueDefinitions.MegaBay2, { _id: false });
 const SanchezWall_MainSchema = new Schema(objectUniqueDefinitions.SanchezWall_Main, { _id: false });
+const StarfactorySchema = new Schema(objectUniqueDefinitions.Starfactory, { _id: false });
 
 
 
@@ -86,7 +99,8 @@ const ObjectUniqueSettingsSchema = new Schema({
   HighBay: HighBaySchema,
   MegaBay1: MegaBay1Schema,
   MegaBay2: MegaBay2Schema,
-  SanchezWall_Main: SanchezWall_MainSchema
+  SanchezWall_Main: SanchezWall_MainSchema,
+  Starfactory: StarfactorySchema
 })
 
 
