@@ -54,13 +54,13 @@ function validateObjectUniqueSettings(value) {
   // console.log(objectUniqueDefinitions[settingType]);
   // console.log(settingType);
 
-  Object.keys(settingsData).forEach(key => {
-    if (settingsData[key] === "true") {
-      settingsData[key] = true;
-    } else if (settingsData[key] === "false") {
-      settingsData[key] = false;
-    }
-  });
+  // Object.keys(settingsData).forEach(key => {
+  //   if (settingsData[key] === "true") {
+  //     settingsData[key] = true;
+  //   } else if (settingsData[key] === "false") {
+  //     settingsData[key] = false;
+  //   }
+  // });
 
   // check schema exists in objectUniqueDefinitions
   const schema = new Schema(objectUniqueDefinitions[settingType], { _id: false });
