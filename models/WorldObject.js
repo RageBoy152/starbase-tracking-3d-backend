@@ -28,6 +28,9 @@ const objectUniqueDefinitions = {
   },
   Starfactory: {
     lights: { type: Number, required: true }
+  },
+  GroundFabricationBuilding: {
+    lights: { type: Number, required: true }
   }
 }
 
@@ -51,12 +54,6 @@ function validateObjectUniqueSettings(value) {
   // console.log(objectUniqueDefinitions[settingType]);
   // console.log(settingType);
 
-
-  // check schema exists in objectUniqueDefinitions
-  const schema = objectUniqueDefinitions[settingType];
-  if (!schema) return false;
-
-
   Object.keys(settingsData).forEach(key => {
     if (settingsData[key] === "true") {
       settingsData[key] = true;
@@ -64,6 +61,11 @@ function validateObjectUniqueSettings(value) {
       settingsData[key] = false;
     }
   });
+
+  // check schema exists in objectUniqueDefinitions
+  const schema = new Schema(objectUniqueDefinitions[settingType], { _id: false });
+  if (!schema) return false;
+
 
 
   // create temp model and validate
@@ -83,25 +85,25 @@ function validateObjectUniqueSettings(value) {
 
 //    OBJECT UNIQUE SETTING SCHEMAS    \\
 
-const RingStand2Schema = new Schema(objectUniqueDefinitions.RingStand2, { _id: false });
-const HighBaySchema = new Schema(objectUniqueDefinitions.HighBay, { _id: false });
-const MegaBay1Schema = new Schema(objectUniqueDefinitions.MegaBay1, { _id: false });
-const MegaBay2Schema = new Schema(objectUniqueDefinitions.MegaBay2, { _id: false });
-const SanchezWall_MainSchema = new Schema(objectUniqueDefinitions.SanchezWall_Main, { _id: false });
-const StarfactorySchema = new Schema(objectUniqueDefinitions.Starfactory, { _id: false });
+// const RingStand2Schema = new Schema(objectUniqueDefinitions.RingStand2, { _id: false });
+// const HighBaySchema = new Schema(objectUniqueDefinitions.HighBay, { _id: false });
+// const MegaBay1Schema = new Schema(objectUniqueDefinitions.MegaBay1, { _id: false });
+// const MegaBay2Schema = new Schema(objectUniqueDefinitions.MegaBay2, { _id: false });
+// const SanchezWall_MainSchema = new Schema(objectUniqueDefinitions.SanchezWall_Main, { _id: false });
+// const StarfactorySchema = new Schema(objectUniqueDefinitions.Starfactory, { _id: false });
 
 
 
-//    OBJECT UNIQUE SETTINGS SCHEMA    \\
+// //    OBJECT UNIQUE SETTINGS SCHEMA    \\
 
-const ObjectUniqueSettingsSchema = new Schema({
-  RingStand2: RingStand2Schema,
-  HighBay: HighBaySchema,
-  MegaBay1: MegaBay1Schema,
-  MegaBay2: MegaBay2Schema,
-  SanchezWall_Main: SanchezWall_MainSchema,
-  Starfactory: StarfactorySchema
-})
+// const ObjectUniqueSettingsSchema = new Schema({
+//   RingStand2: RingStand2Schema,
+//   HighBay: HighBaySchema,
+//   MegaBay1: MegaBay1Schema,
+//   MegaBay2: MegaBay2Schema,
+//   SanchezWall_Main: SanchezWall_MainSchema,
+//   Starfactory: StarfactorySchema
+// })
 
 
 

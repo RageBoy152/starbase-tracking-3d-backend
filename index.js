@@ -52,7 +52,7 @@ mongoose.connect(dbURI)
 app.get('/get-worldobjects', (req, res) => {
   WorldObject.find()
   .then(dbRes => {
-    res.send(dbRes)
+    res.send(dbRes);
   })
   .catch(err => {
     console.log(`Error fetching WorldObjects from database. ${err}`);
