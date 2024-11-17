@@ -29,6 +29,10 @@ const objectUniqueDefinitions = {
   Starfactory: {
     lights: { type: Number, required: true }
   },
+  SlideUpDoor: {
+    targetDoorPosition: { type: Number, required: true },
+    doorSpeed: { type: Number, required: true }
+  },
   GroundFabricationBuilding: {
     lights: { type: Number, required: true }
   }
@@ -114,6 +118,7 @@ const WorldObjectSchema = new Schema({
   worldObjectId: { type: String, required: true },
   prefabName: { type: String, required: true },
   prefabPath: { type: String, required: true },
+  objectName: { type: String, required: true },
   position: {
     x: { type: Number, required: true },
     y: { type: Number, required: true },

@@ -138,7 +138,7 @@ app.post('/set-sceneobject-data', (req, res) => {
 // save one worldobjects data
 
 app.post('/set-worldobject-data', (req, res) => {
-  const { deleteObject, editorId, docId, staticObject, worldObjectId, prefabPath, prefabName, position, rotation, scale, objectUniqueSettings } = req.body;
+  const { deleteObject, editorId, docId, staticObject, worldObjectId, prefabPath, prefabName, objectName, position, rotation, scale, objectUniqueSettings } = req.body;
 
   if (!process.env.VALID_EDITOR_IDS.split(",").includes(editorId)) {
     res.send({ error_message: `Editor ID not authorized`, error: "Int_401" });
@@ -158,6 +158,7 @@ app.post('/set-worldobject-data', (req, res) => {
     worldObjectId: worldObjectId,
     prefabName: prefabName,
     prefabPath: prefabPath,
+    objectName: objectName,
     position: position,
     rotation: rotation,
     scale: scale,
