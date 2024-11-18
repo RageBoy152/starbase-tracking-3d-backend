@@ -138,9 +138,9 @@ app.post('/set-sceneobject-data', (req, res) => {
 // save one worldobjects data
 
 app.post('/set-worldobject-data', (req, res) => {
-  const { deleteObject, editorId, docId, staticObject, worldObjectId, prefabPath, prefabName, objectName, position, rotation, scale, objectUniqueSettings } = req.body;
+  const { deleteObject, editorId, userId, docId, staticObject, worldObjectId, prefabPath, prefabName, objectName, ownerUserId, globalUserObject, position, rotation, scale, objectUniqueSettings } = req.body;
 
-  if (!process.env.VALID_EDITOR_IDS.split(",").includes(editorId)) {
+  if ((!globalUserObject && !process.env.VALID_EDITOR_IDS.split(",").includes(editorId)) || (ownerUserId && globalUserObject && (ownerUserId != userId))) {
     res.send({ error_message: `Editor ID not authorized`, error: "Int_401" });
     return;
   }
@@ -159,6 +159,8 @@ app.post('/set-worldobject-data', (req, res) => {
     prefabName: prefabName,
     prefabPath: prefabPath,
     objectName: objectName,
+    ownerUserId: ownerUserId,
+    globalUserObject: globalUserObject,
     position: position,
     rotation: rotation,
     scale: scale,
@@ -191,7 +193,7 @@ app.post('/set-worldobject-data', (req, res) => {
 
     WorldObject.findOneAndDelete({ _id: docId })
     .then(dbRes => {
-      res.send({ deleted: true, worldObjectId: worldObjectId, dbRes: dbRes })
+      res.send({ deleted: true, worldObjectId: worldObjectId, ownerUserId: ownerUserId, dbRes: dbRes })
     })
     .catch(err => {
       let errMsg = `Error deleting WorldObject in database. | doc_id: ${docId}, worldObjectId: ${worldObjectId} | ${err}`;
@@ -204,7 +206,7 @@ app.post('/set-worldobject-data', (req, res) => {
 
     worldObject.save()
     .then(dbRes => {
-      res.send({ spawned: true, worldObjectId: worldObjectId, docId: dbRes._id.toString(), dbRes: dbRes })
+      res.send({ spawned: true, worldObjectId: worldObjectId, ownerUserId: ownerUserId, docId: dbRes._id.toString(), dbRes: dbRes })
     })
     .catch(err => {
       let errMsg = `Error adding WorldObject to database. | worldObjectId: ${worldObjectId} | ${err}`;

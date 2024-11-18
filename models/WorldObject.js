@@ -16,7 +16,7 @@ const MegaBayDef = {
 
 const objectUniqueDefinitions = {
   RingStand2: {
-    wheelCovers: { type: Boolean, required: true }
+    wheelCovers: { type: Boolean, required: false }
   },
   HighBay: {
     lights: { type: Number, required: true }
@@ -35,6 +35,14 @@ const objectUniqueDefinitions = {
   },
   GroundFabricationBuilding: {
     lights: { type: Number, required: true }
+  },
+  Sign: {
+    text: { type: String, required: false, default: ""  }
+  },
+  Poll: {
+    text: { type: String, required: false, default: ""  },
+    upVotes: { type: Number, required: false },
+    downVotes: { type: Number, required: false }
   }
 }
 
@@ -119,6 +127,8 @@ const WorldObjectSchema = new Schema({
   prefabName: { type: String, required: true },
   prefabPath: { type: String, required: true },
   objectName: { type: String, required: true },
+  ownerUserId: { type: String, required: false },
+  globalUserObject: { type: Boolean, required: true },
   position: {
     x: { type: Number, required: true },
     y: { type: Number, required: true },
