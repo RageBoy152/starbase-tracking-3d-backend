@@ -153,6 +153,9 @@ app.post('/set-worldobject-data', (req, res) => {
   };
 
 
+  // console.log(objectUniqueSettings);
+
+
   let newWorldObjectData = {
     staticObject: staticObject,
     worldObjectId: worldObjectId,
@@ -211,7 +214,7 @@ app.post('/set-worldobject-data', (req, res) => {
     .catch(err => {
       let errMsg = `Error adding WorldObject to database. | worldObjectId: ${worldObjectId} | ${err}`;
       console.log(errMsg);
-      res.send({ error_message: errMsg, error: err.toString() });
+      res.send({ error_message: errMsg, error: err.toString(), errorLocation: "spawn" });
     });
   }
 });
@@ -222,7 +225,9 @@ app.post('/set-worldobject-data', (req, res) => {
 // check for editor perms
 
 app.post('/check-editor-id', (req, res) => {
-  const { editorId } = req.body;
+  const { editorId, userId } = req.body;
 
-  res.send({ authorized: process.env.VALID_EDITOR_IDS.split(",").includes(editorId).toString() });
+  console.log(editorId, userId);
+
+  res.send({ authorized: process.env.VALID_EDITOR_IDS.split(",").includes(editorId).toString(), banned: process.env.BANNED_USER_IDS.split(",").includes(userId).toString() });
 });
