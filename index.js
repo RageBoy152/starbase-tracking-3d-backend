@@ -140,10 +140,17 @@ app.post('/set-sceneobject-data', (req, res) => {
 app.post('/set-worldobject-data', (req, res) => {
   const { deleteObject, editorId, userId, docId, staticObject, worldObjectId, prefabPath, prefabName, objectName, ownerUserId, globalUserObject, position, rotation, scale, objectUniqueSettings } = req.body;
 
-  if ((!globalUserObject && !process.env.VALID_EDITOR_IDS.split(",").includes(editorId)) || (ownerUserId && globalUserObject && (ownerUserId != userId))) {
+
+  if (
+    (!globalUserObject && !process.env.VALID_EDITOR_IDS.split(",").includes(editorId)) ||
+    (globalUserObject && process.env.BANNED_USER_IDS.split(",").includes(editorId)) ||
+    (globalUserObject && !process.env.VALID_EDITOR_IDS.split(",").includes(editorId) && ownerUserId && (ownerUserId != userId))
+    ) {
+
     res.send({ error_message: `Editor ID not authorized`, error: "Int_401" });
     return;
   }
+  
 
   const newObjectUniqueSettings = {
     [prefabName]: objectUniqueSettings.reduce((acc, setting) => {
@@ -171,12 +178,12 @@ app.post('/set-worldobject-data', (req, res) => {
   }
 
 
-  console.log(worldObjectId, deleteObject, docId);
+  // console.log(worldObjectId, deleteObject, docId);
 
 
   const worldObject = new WorldObject(newWorldObjectData);
 
-  console.log(worldObject);
+  // console.log(worldObject);
 
   if (docId && !deleteObject) {
     // editing

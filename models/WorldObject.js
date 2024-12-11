@@ -16,7 +16,12 @@ const MegaBayDef = {
 
 const objectUniqueDefinitions = {
   RingStand2: {
-    wheelCovers: { type: Boolean, required: false }
+    brakesEngaged: { type: Boolean, required: false }
+  },
+  StandTransporter: {
+    brakesEngaged: { type: Boolean, required: false },
+    transportEngaged: { type: Boolean, required: false },
+    connectedWorldObjectId: { type: String, required: false }
   },
   HighBay: {
     lights: { type: Number, required: true }
