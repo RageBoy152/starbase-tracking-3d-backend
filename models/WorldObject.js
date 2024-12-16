@@ -18,6 +18,9 @@ const objectUniqueDefinitions = {
   RingStand2: {
     brakesEngaged: { type: Boolean, required: false }
   },
+  RingStack: {
+    ringCount: { type: Number, required: false }
+  },
   StandTransporter: {
     brakesEngaged: { type: Boolean, required: false },
     transportEngaged: { type: Boolean, required: false },

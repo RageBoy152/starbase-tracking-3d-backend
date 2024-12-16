@@ -140,7 +140,6 @@ app.post('/set-sceneobject-data', (req, res) => {
 app.post('/set-worldobject-data', (req, res) => {
   const { deleteObject, editorId, userId, docId, staticObject, worldObjectId, prefabPath, prefabName, objectName, ownerUserId, globalUserObject, position, rotation, scale, objectUniqueSettings } = req.body;
 
-
   if (
     (!globalUserObject && !process.env.VALID_EDITOR_IDS.split(",").includes(editorId)) ||
     (globalUserObject && process.env.BANNED_USER_IDS.split(",").includes(editorId)) ||
@@ -160,7 +159,7 @@ app.post('/set-worldobject-data', (req, res) => {
   };
 
 
-  // console.log(objectUniqueSettings);
+  // console.log(newObjectUniqueSettings);
 
 
   let newWorldObjectData = {
