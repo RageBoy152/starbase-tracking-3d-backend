@@ -20,7 +20,7 @@ const urlWhiteList = ['https://keen-lokum-70f628.netlify.app', undefined];     /
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (urlWhiteList.indexOf(origin) !== -1 && !origin.includes('http://localhost:')) { callback(null, true); }
+    if (urlWhiteList.includes(origin) || origin.includes('http://localhost:')) { callback(null, true); }
     else { callback(new Error(`Not allowed by CORS. SRC: ${origin}`)); }
   }
 }));
