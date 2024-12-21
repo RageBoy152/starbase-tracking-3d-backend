@@ -16,7 +16,7 @@ const SceneObject = require("./models/SceneObject");
 
 // cors - url whitelist setup
 
-const urlWhiteList = ['https://keen-lokum-70f628.netlify.app', 'https://localhost:58108', undefined];     // undefined is for when we go straight to the backend url
+const urlWhiteList = ['https://keen-lokum-70f628.netlify.app', 'http://localhost:58108', undefined];     // undefined is for when we go straight to the backend url
 
 app.use(cors({
   origin: function (origin, callback) {
