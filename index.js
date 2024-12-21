@@ -16,11 +16,11 @@ const SceneObject = require("./models/SceneObject");
 
 // cors - url whitelist setup
 
-const urlWhiteList = ['https://keen-lokum-70f628.netlify.app', 'http://localhost:58108', undefined];     // undefined is for when we go straight to the backend url
+const urlWhiteList = ['https://keen-lokum-70f628.netlify.app', undefined];     // undefined is for when we go straight to the backend url
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (urlWhiteList.indexOf(origin) !== -1) { callback(null, true); }
+    if (urlWhiteList.indexOf(origin) !== -1 && !origin.includes('http://localhost:')) { callback(null, true); }
     else { callback(new Error(`Not allowed by CORS. SRC: ${origin}`)); }
   }
 }));
